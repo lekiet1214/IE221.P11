@@ -1,0 +1,43 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-6">
+            <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+        </div>
+        <div class="col-6">
+            <h1>{{ product.name }}</h1>
+            <p>{{ product.description }}</p>
+            <p>${{ product.price }}</p>
+            <button id="add-to-cart-btn" class="btn btn-primary" data-product-id="{{ product.id }}">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+    document.getElementById("add-to-cart-btn").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevents the default link behavior
+        var productId = this.getAttribute('data-product-id');
+
+        // Send the AJAX request to add the product to the cart
+        fetch(`/add_to_cart/${productId}/`, {
+            method: 'GET', // Make sure to use GET here
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest' // Specify it's an AJAX request
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Product added to cart');
+            } else {
+                alert('There was an error adding the product to the cart');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was a problem with the request');
+        });
+    });
+</script>
+{% endblock %}

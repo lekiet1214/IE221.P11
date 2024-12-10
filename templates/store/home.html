@@ -1,0 +1,23 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Welcome to My Store</h1>
+    <p>Check out our products:</p>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-4">
+                <div class="card mb-4">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title
+                        ">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text">${{ product.price }}</p>
+                        <a href="{% url 'product' product.id %}" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+    <div class="search-container">
+        <h1>Search Products</h1>
+        <form method="get" action="{% url 'search_products' %}">
+            <input type="text" name="q" value="{{ query }}" placeholder="Search for products..." class="form-control">
+            <button type="submit" class="btn btn-primary mt-2">Search</button>
+        </form>
+
+        {% if query %}
+            <h2>Results for "{{ query }}":</h2>
+            {% if products %}
+                <div class="product-list">
+                    {% for product in products %}
+                        <div class="product-item">
+                            <h3>{{ product.name }}</h3>
+                            <p>{{ product.description }}</p>
+                            <p><strong>Price:</strong> ${{ product.price }}</p>
+                            <p><strong>Stock:</strong> {{ product.stock }}</p>
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-thumbnail">
+                            {% endif %}
+                            <div class="d-grid gap-2">
+                                <a href="{% url 'product' product.id %}" class="btn btn-primary">View</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No products found matching your search.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
