@@ -8,7 +8,7 @@ pip install -r requirements.txt
 
 2. Run the main script
 ```bash
-python manage.py makemigrations
+python manage.py makemigrations store
   
 python manage.py migrate
 
