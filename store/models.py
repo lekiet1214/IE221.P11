@@ -9,10 +9,9 @@ class Product(models.Model):
     price = models.FloatField()
     stock = models.PositiveIntegerField()
     image = models.ImageField(upload_to='products/', null=True, blank=True)
-
+    image_url = models.URLField(null=True, blank=True)
     def __str__(self):
         return self.name
-
 
 # CartItem Model
 class CartItem(models.Model):
