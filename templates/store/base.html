@@ -29,6 +29,15 @@
         .navbar {
             margin-bottom: 20px;
         }
+
+        /* Fix for form styling */
+        .navbar .logout-form {
+            display: inline-block;
+        }
+
+        .navbar .logout-form button {
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -55,9 +64,7 @@
                     <li class="nav-item">
                         <a class="btn btn-primary text-white" href="{% url 'profile' %}">Profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-danger text-white" href="{% url 'logout' %}">Logout</a>
-                    </li>
+
                 {% else %}
                     <li class="nav-item">
                         <a class="btn btn-primary text-white" href="{% url 'login' %}">Login</a>
